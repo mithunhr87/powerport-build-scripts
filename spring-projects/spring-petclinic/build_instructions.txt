@@ -1,0 +1,26 @@
+# Dependencies
+# ---------------------
+yum update -y
+yum groupinstall -y "Development Tools"
+yum install -y java-17-openjdk-devel
+yum install -y maven
+
+# Build
+# ---------------------
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+./mvnw spring-boot:run
+
+# References
+# ---------------------
+https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml
+https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml
+https://gitpod.io/#https://github.com/spring-projects/spring-petclinic
+https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918
+https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application?slide=20
+https://spring.io/guides/gs/spring-boot
+https://spring.io/guides/gs/maven/
+https://spring.io/guides/gs/gradle/
+https://github.com/spring-projects/spring-petclinic/issues
+https://docs.spring.io/spring-boot/how-to/properties-and-configuration.html#howto.properties-and-configuration.set-active-spring-profiles
+https://github.com/spring-projects/spring-petclinic/blob/main/src/main/resources/db/mysql/petclinic_db_setup_mysql.txt
