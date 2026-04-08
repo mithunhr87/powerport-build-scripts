@@ -1,0 +1,66 @@
++++++ code-server/ci/build/build.sh
+#!/bin/bash
+set -euo pipefail
+
+# This script builds code-server and outputs the built files to the dist
+# directory. It is used by the CI to build code-server for release.
+
+# The script is run from the root of the repository.
+
+# The script assumes that the following environment variables are set:
+# - CODE_SERVER_VERSION: the version of code-server to build
+# - CODE_SERVER_COMMIT: the commit of code-server to build
+# - CODE_SERVER_REPO: the repository of code-server to build
+# - CODE_SERVER_BRANCH: the branch of code-server to build
+# - CODE_SERVER_TAG: the tag of code-server to build
+# - CODE_SERVER_BUILD: the build number of code-server to build
+# - CODE_SERVER_BUILD_DATE: the build date of code-server to build
+# - CODE_SERVER_BUILD_PLATFORM: the platform of code-server to build
+# - CODE_SERVER_BUILD_ARCH: the architecture of code-server to build
+# - CODE_SERVER_BUILD_OS: the OS of code-server to build
+# - CODE_SERVER_BUILD_TYPE: the build type of code-server to build
+# - CODE_SERVER_BUILD_TARGET: the build target of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT: the build output of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_DIR: the build output directory of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE: the build output file of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_NAME: the build output file name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_PATH: the build output file path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_URL: the build output file URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256: the build output file SHA256 of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_URL: the build output file SHA256 URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_PATH: the build output file SHA256 path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_NAME: the build output file SHA256 name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM: the build output file SHA256 sum of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_PATH: the build output file SHA256 sum path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_NAME: the build output file SHA256 sum name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_URL: the build output file SHA256 sum URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE: the build output file SHA256 sum file of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_PATH: the build output file SHA256 sum file path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_NAME: the build output file SHA256 sum file name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_URL: the build output file SHA256 sum file URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256: the build output file SHA256 sum file SHA256 of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_URL: the build output file SHA256 sum file SHA256 URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_PATH: the build output file SHA256 sum file SHA256 path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_NAME: the build output file SHA256 sum file SHA256 name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM: the build output file SHA256 sum file SHA256 sum of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_PATH: the build output file SHA256 sum file SHA256 sum path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_NAME: the build output file SHA256 sum file SHA256 sum name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_URL: the build output file SHA256 sum file SHA256 sum URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE: the build output file SHA256 sum file SHA256 sum file of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_PATH: the build output file SHA256 sum file SHA256 sum file path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_NAME: the build output file SHA256 sum file SHA256 sum file name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_URL: the build output file SHA256 sum file SHA256 sum file URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256: the build output file SHA256 sum file SHA256 sum file SHA256 of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_URL: the build output file SHA256 sum file SHA256 sum file SHA256 URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_PATH: the build output file SHA256 sum file SHA256 sum file SHA256 path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_NAME: the build output file SHA256 sum file SHA256 sum file SHA256 name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM: the build output file SHA256 sum file SHA256 sum file SHA256 sum of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_PATH: the build output file SHA256 sum file SHA256 sum file SHA256 sum path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_NAME: the build output file SHA256 sum file SHA256 sum file SHA256 sum name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_URL: the build output file SHA256 sum file SHA256 sum file SHA256 sum URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE: the build output file SHA256 sum file SHA256 sum file SHA256 sum file of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_PATH: the build output file SHA256 sum file SHA256 sum file SHA256 sum file path of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_NAME: the build output file SHA256 sum file SHA256 sum file SHA256 sum file name of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_URL: the build output file SHA256 sum file SHA256 sum file SHA256 sum file URL of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256_SUM_FILE_SHA256: the build output file SHA256 sum file SHA256 sum file SHA256 sum file SHA256 of code-server to build
+# - CODE_SERVER_BUILD_OUTPUT_FILE_SHA
