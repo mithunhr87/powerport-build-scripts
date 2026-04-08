@@ -1,0 +1,89 @@
+### How do I run this?
+1. Install dependencies
+2. Build the project
+3. Run the executable
+
+#### Dependencies
+- C++ compiler (g++)
+- CMake (version 3.10 or higher)
+- OpenMP (for multi-threading)
+
+#### Build
+1. Clone the repository
+2. Create a build directory
+3. Run CMake to configure the project
+4. Build the project using make
+5. Run the executable
+
+#### Run
+The executable will generate an image file named `output.ppm` in the current directory.
+
+### What are the controls?
+- Press `ESC` to exit the program
+- Press `R` to regenerate the image
+- Press `S` to save the image to `output.ppm`
+
+### What are the future plans?
+- Finish the Octree implementation
+- Add more 3D models to the scene
+- Improve the performance of the raytracer
+- Add more features to the raytracer
+
+### What are the known issues?
+- The Octree implementation is not complete
+- The raytracer is not optimized for performance
+- The raytracer does not support all features of the .obj file format
+
+### What are the dependencies?
+- C++ compiler (g++)
+- CMake (version 3.10 or higher)
+- OpenMP (for multi-threading)
+
+### How do I build the project?
+1. Clone the repository
+2. Create a build directory
+3. Run CMake to configure the project
+4. Build the project using make
+5. Run the executable
+
+### What are the controls?
+- Press `ESC` to exit the program
+- Press `R` to regenerate the image
+- Press `S` to save the image to `output.ppm`
+
+### What are the future plans?
+- Finish the Octree implementation
+- Add more 3D models to the scene
+- Improve the performance of the raytracer
+- Add more features to the raytracer
+
+### What are the known issues?
+- The Octree implementation is not complete
+- The raytracer is not optimized for performance
+- The raytracer does not support all features of the .obj file format
+
+OUTPUT:
+
+```bash
+# Dependencies
+# ---------------------
+yum update -y
+yum groupinstall -y "Development Tools"
+yum install -y cmake
+yum install -y gcc-c++
+yum install -y libgomp
+
+# Build
+# ---------------------
+git clone <repository_url>
+cd <repository_name>
+mkdir build
+cd build
+cmake ..
+make
+./raytracer
+
+# References
+# ---------------------
+https://raytracing.github.io/
+https://en.wikipedia.org/wiki/Ray_tracing_(graphics)
